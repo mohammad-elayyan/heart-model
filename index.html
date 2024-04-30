@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="./assets/css/all.min.css"> -->
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Tajawal', sans-serif;
+            color: #fff;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            /* position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: -1; */
+            /* background-image: url('./assets/models/beating-heart/textures/material_0_specularGlossiness.gif'); */
+        }
+
+        .tooltip {
+            padding: .9rem 2rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, .5);
+            color: #0b0b71;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: .5px;
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: all .2s ease-in-out;
+            pointer-events: none;
+            position: absolute;
+        }
+
+        /* .tooltip::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 0, 0, .7);
+            top: 90%;
+            left: 50%;
+            transform: rotateZ(45deg) translateX(-50%);
+            z-index: -1;
+        } */
+
+        /* .btn {
+            background-color: yellow;
+            width: 16.4px;
+            height: 16.4px;
+            border-radius: 50%;
+        }
+
+        .btn div {
+            pointer-events: none;
+        } */
+
+        .hide {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        .show {
+            opacity: 1;
+            transform: translateY(0px) rotate3d(0, 1, 0.5, 0deg);
+        }
+
+        .left {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            position: absolute;
+            top: 10%;
+            left: 1%;
+            transform: rotateZ(5deg);
+        }
+
+        .center {
+            background-image: url(./assets/images/desc.png);
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+            top: 7%;
+            left: 50%;
+            width: 180px;
+            height: 260px;
+            padding: .5rem 8rem;
+            text-align: center;
+            transform: translateX(-50%);
+            overflow: hidden;
+            direction: rtl;
+            opacity: 0;
+            transition: opacity .5s ease;
+        }
+
+        .center p {
+            margin: 0;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .right {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            position: absolute;
+            top: 10%;
+            right: 1%;
+            transform: rotateZ(-5deg);
+        }
+
+        .left .col1 {
+            position: relative;
+            top: 2.9rem;
+        }
+
+        .right .col2 {
+            position: relative;
+            top: 2.9rem;
+        }
+
+        .btn {
+            background-image: url(./assets/images/btn.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 105px;
+            height: 95px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-image: url(./assets/images/btn.gif);
+        }
+
+        .btn span {
+            padding: 0 .8rem;
+            text-align: center;
+        }
+
+        .left .btn {
+            transform: rotateZ(5deg);
+        }
+
+        .right .btn {
+            transform: rotateZ(-5deg);
+        }
+
+        .pulse {
+            width: 45px;
+            position: absolute;
+        }
+
+        .end1 {
+            position: absolute;
+            background-image: url(./assets/images/pulsing.gif);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            width: 50px;
+            height: 50px;
+            top: 480px;
+            left: 385px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="left">
+        <div class="col1">
+            <div class="btn"><span></span></div>
+            <div class="btn"><span></span></div>
+            <div class="btn"><span></span></div>
+        </div>
+        <div class="col2">
+            <div class="btn"><span></span></div>
+            <div class="btn"><span></span></div>
+            <div class="btn"><span></span></div>
+        </div>
+    </div>
+    <div class="center" id="start">
+        <p>الشريان التاجي:</p>
+        <span>هو أحد الشرايين الرئيسة في جسم الإنسان. وظيفته الأساسية هي توصيل الدم المؤكسج إلى عضلة القلب نفسها.
+            وللشريان
+            التاجي دور حيوي في تزويد القلب بالأكسجين والمواد الغذائية الضرورية لأداء وظائفه.
+        </span>
+    </div>
+    <div class="right">
+        <div class="col1">
+            <div class="btn"><span></span></div>
+            <div class="btn"><span></span></div>
+            <div class="btn"><span></span></div>
+        </div>
+        <div class="col2">
+            <div class="btn"><span></span></div>
+            <div class="btn"><span></span></div>
+            <div class="btn"><span></span></div>
+        </div>
+    </div>
+    <div id="end" class="end1"></div>
+
+    <script src="assets/js/three.min.js"></script>
+    <script src="assets/js/FBXLoader.js"></script>
+    <script src="assets/js/OrbitControls.js"></script>
+    <script src="assets/js/fflate.min.js"></script>
+    <script src="assets/js/CSS2DRenderer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./assets/js/main.js"></script>
+
+</body>
+
+</html>
